@@ -1,5 +1,6 @@
 import { Component } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Badge, Button } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 class SigleBook extends Component {
   state = {
@@ -20,7 +21,12 @@ class SigleBook extends Component {
         <Card.Body>
           <Card.Title>{this.props.book.title}</Card.Title>
         </Card.Body>
-      </Card>
+        <Card.Text>
+          <Badge bg="dark">{this.props.book.price}$</Badge>
+        </Card.Text>
+        <Button variant="success">{this.props.book.category}</Button>
+        {this.state.selected && <CommentArea asin={this.props.book.asin} />}
+      </Card> //                                   Utilizzando && noi stiamo legando CommentArea solo se la situazione è true cioe se viene clicctata l'immagine ----   asin={this.props.book.asin} aggiungiamo questa riga per ricavarci l'ID di ogni libro che ci servita alla FETCH in COMMENTAREA
     );
   }
 }
