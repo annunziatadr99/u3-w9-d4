@@ -4,7 +4,10 @@ const CommentList = ({ reviews }) => (
   <>
     <ListGroup>
       {reviews.map((review) => (
-        <ListGroup.Item>{review.comment}</ListGroup.Item>
+        <ListGroup.Item key={review._id}>
+          {" "}
+          review={review.comment}
+        </ListGroup.Item>
       ))}
     </ListGroup>
   </>
