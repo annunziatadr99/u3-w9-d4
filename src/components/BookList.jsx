@@ -1,11 +1,8 @@
 import { Container, Row, Col, FormControl } from "react-bootstrap";
-import SigleBook from "./SingleBook";
+import SingleBook from "./SingleBook";
 import { Component } from "react";
-
 class BookList extends Component {
-  state = {
-    SearchFilter: "", // abbiamo definito il parametro di  uno stato di partenza che in questo caso attende una stringa come valore del parametro
-  };
+  state = { searchFilter: "" };
   render() {
     return (
       <Container>
@@ -13,21 +10,25 @@ class BookList extends Component {
           <Col xs={8}>
             <FormControl
               type="text"
-              value={this.state.SearchFilter} // il VALUE sarà uguale a SearchFilter: e.target.value
-              onChange={(e) => this.setState({ SearchFilter: e.target.value })}
+              value={this.state.searchFilter}
+              onChange={(e) => this.setState({ searchFilter: e.target.value })}
               placeholder="Search"
             />
           </Col>
         </Row>
-        <Row xs={1} sm={2} md={4} lg={6}>
+        <Row xs={1} sm={1} md={2} lg={3}>
           {this.props.books
             .filter((book) =>
               book.title
                 .toLowerCase()
-                .includes(this.state.SearchFilter.toLowerCase())
+                .includes(this.state.searchFilter.toLowerCase())
             )
             .map((book) => (
-              <SigleBook book={book} key={book.asin} />
+              <SingleBook
+                book={book}
+                key={book.asin}
+                onBookClick={() => this.props.onBookClick(book.asin)}
+              />
             ))}
         </Row>
       </Container>
